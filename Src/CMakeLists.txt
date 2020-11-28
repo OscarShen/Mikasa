@@ -1,0 +1,17 @@
+﻿project ("Mikasa")
+
+file(GLOB_RECURSE ALL_FILES *.h *.cpp)
+
+set(MIKASA_SOURCE_DIR ${MIKASA_PROJECT_DIR}/Src)
+set(MIKASA_LIB_DIR ${MIKASA_PROJECT_DIR}/Lib)
+set(MIKASA_THIRD_PARTY_DIR ${MIKASA_PROJECT_DIR}/ThirdParty)
+
+set(MIKASA_DEPENDENCY_GLFW_LIB_NAME glfw)
+
+include_directories(${MIKASA_THIRD_PARTY_DIR}/${MIKASA_DEPENDENCY_GLFW_LIB_NAME}/include)
+
+link_directories(${MIKASA_LIB_DIR}/${CMAKE_BUILD_TYPE})
+
+link_libraries(${MIKASA_DEPENDENCY_GLFW_LIB_NAME})
+
+add_executable(Mikasa ${ALL_FILES})
