@@ -14,3 +14,5 @@ endif()
 
 add_subdirectory(Src)
 add_subdirectory(ThirdParty/glfw)
+add_subdirectory(ThirdParty/glm)
+add_subdirectory(ThirdParty/nlohmann)
