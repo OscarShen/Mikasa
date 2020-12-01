@@ -81,12 +81,13 @@ if (APPLE)
                                 LANGUAGE C)
 endif()
 
-add_library(glfw ${glfw_SOURCES} ${glfw_HEADERS})
+add_library(glfw SHARED ${glfw_SOURCES} ${glfw_HEADERS})
 set_target_properties(glfw PROPERTIES
                       OUTPUT_NAME ${GLFW_LIB_NAME}
                       VERSION ${GLFW_VERSION_MAJOR}.${GLFW_VERSION_MINOR}
                       SOVERSION ${GLFW_VERSION_MAJOR}
                       POSITION_INDEPENDENT_CODE ON)
+
 
 if (${CMAKE_VERSION} VERSION_EQUAL "3.1.0" OR
     ${CMAKE_VERSION} VERSION_GREATER "3.1.0")

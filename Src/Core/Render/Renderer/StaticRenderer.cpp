@@ -1,0 +1,1 @@
+#include "StaticRenderer.h"

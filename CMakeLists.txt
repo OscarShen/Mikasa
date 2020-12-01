@@ -4,6 +4,8 @@ project ("Mikasa")
 
 set(MIKASA_PROJECT_DIR ${PROJECT_SOURCE_DIR})
 
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+
 set(CMAKE_CONFIGURATION_TYPES Debug Release)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${MIKASA_PROJECT_DIR}/Lib)
@@ -20,3 +22,5 @@ add_subdirectory(Src)
 add_subdirectory(ThirdParty/glfw)
 add_subdirectory(ThirdParty/glm)
 add_subdirectory(ThirdParty/nlohmann)
+add_subdirectory(ThirdParty/glad)
+

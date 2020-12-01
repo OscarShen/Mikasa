@@ -1,6 +1,8 @@
 #pragma once
 
-class MDisplayManager
+#include "CoreMinimal.h"
+
+class CORE_API MDisplayManager
 {
 public:
     static MDisplayManager& Get();
