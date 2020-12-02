@@ -70,3 +70,5 @@ FHsvColor::FHsvColor(float Hue, float Saturation, float Value)
     , Value(Value)
 {
 }
+
+FColor FColor::BlackColor = FColor(0, 0, 0, 1.0f);

@@ -17,3 +17,4 @@ set_target_properties(OpenGL PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY ${MIKASA_P
 target_link_libraries(OpenGL debug Core_d optimized Core)
 target_link_libraries(OpenGL debug glfw_d optimized glfw)
 target_link_libraries(OpenGL debug glad_d optimized glad)
+

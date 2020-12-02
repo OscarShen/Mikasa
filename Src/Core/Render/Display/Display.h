@@ -1,7 +1,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Util/Color.h"
+
+class FColor;
 
 class CORE_API FDisplaySize
 {
@@ -32,6 +33,12 @@ public:
 
     virtual void InitDisplay() = 0;
     virtual void RefreshDisplay() = 0;
+    virtual void DestroyDisplay() = 0;
+
+    virtual void CloseDisplay() = 0;
+    virtual bool ShouldCloseDisplay() = 0;
+
+    virtual void SwapBuffers() = 0;
 
     virtual void SetDisplaySize(const FDisplaySize& InDisplaySize) = 0;
     virtual void SetVSync(bool Enable) = 0;

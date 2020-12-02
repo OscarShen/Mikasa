@@ -17,3 +17,4 @@ set_target_properties(Main PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY ${MIKASA_PRO
 target_link_libraries(Main debug Core_d optimized Core)
 target_link_libraries(Main debug glfw_d optimized glfw)
 target_link_libraries(Main debug glad_d optimized glad)
+target_link_libraries(Main debug OpenGL_d optimized OpenGL)

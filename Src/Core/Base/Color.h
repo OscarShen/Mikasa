@@ -2,7 +2,7 @@
 
 #include "CoreMinimal.h"
 
-class FHsvColor
+class CORE_API FHsvColor
 {
 public:
     FHsvColor(float Hue, float Saturation, float Value);
@@ -11,7 +11,7 @@ public:
     float Hue, Saturation, Value;
 };
 
-class FColor
+class CORE_API FColor
 {
 public:
     FColor(const glm::vec3& InColor);
@@ -26,6 +26,8 @@ public:
     FColor operator*(const FColor& Color) const;
 
     std::string ToString() const;
+
+    static FColor BlackColor;
 
 public:
     float R, G, B, A;
