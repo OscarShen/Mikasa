@@ -1,7 +1,9 @@
 #include "CoreMinimal.h"
-#include "Display/Display.h"
 
-class MDisplayGL : public MDisplay
+#include "Render/RenderManager.h"
+#include "Render/Display/Display.h"
+
+class FDisplayGL : public FDisplay
 {
 public:
     virtual void InitDisplay() override
@@ -12,7 +14,7 @@ public:
     {
     }
 
-    virtual void SetDisplaySize(const MDisplaySize& InDisplaySize) override
+    virtual void SetDisplaySize(const FDisplaySize& InDisplaySize) override
     {
 
     }
@@ -20,30 +22,34 @@ public:
     {
 
     }
-    virtual void SetInitBackground(const MColor& Color) override
+    virtual void SetInitBackground(const FColor& Color) override
     {
 
     }
-    virtual void SetTitle(const MString& Title) override
+    virtual void SetTitle(const std::string& Title) override
     {
 
     }
 };
 
-class MDisplayGLInstance : public MDisplayInstanceBase
+class FDisplayRegisterGL
 {
 public:
-    MDisplayGLInstance()
-        : MDisplayInstanceBase("OpenGL")
+    FDisplayRegisterGL()
     {
+        FRenderManager::Get().RegisterDisplay("OpenGL", []() -> FDisplayPtr
+            {
+                return std::make_shared<FDisplayGL>();
+            });
     }
-    virtual TSharedPtr<MDisplay> CreateInstance() override
+
+    ~FDisplayRegisterGL()
     {
-        return std::make_shared<MDisplayGL>();
+        FRenderManager::Get().UnRegisterDisplay("OpenGL");
     }
 };
 
 namespace
 {
-    MDisplayGLInstance Test;
+    FDisplayRegisterGL DisplayGL;
 }

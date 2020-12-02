@@ -1,5 +1,5 @@
 #include "ShaderProgram.h"
 
-MShaderProgram::MShaderProgram(const MString& VertexFile, const MString& FragmentFile)
+FShaderProgram::FShaderProgram(const std::string& VertexFile, const std::string& FragmentFile)
 {
 }

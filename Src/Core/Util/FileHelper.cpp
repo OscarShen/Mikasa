@@ -1,6 +1,7 @@
 #include "FileHelper.h"
+#include <filesystem>
 
-MString MFileHelper::GetResourcePath()
+std::string FFileHelper::GetResourcePath()
 {
-    return MFileSystem::current_path().string();
+    return std::filesystem::current_path().string();
 }

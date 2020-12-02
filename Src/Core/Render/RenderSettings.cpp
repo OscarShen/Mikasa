@@ -1,45 +1,47 @@
 #include "RenderSettings.h"
+#include <fstream>
+#include "nlohmann/json.hpp"
 
-MRenderSettings& MRenderSettings::Get()
+FRenderSettings& FRenderSettings::Get()
 {
-    static MRenderSettings RenderSettings;
+    static FRenderSettings RenderSettings;
     return RenderSettings;
 }
 
-void MRenderSettings::SaveSettings(const MString& Path)
+void FRenderSettings::SaveSettings(const std::string& Path)
 {
-    MFileWriter FileWriter;
+    std::ofstream FileWriter;
 
     FileWriter.open(Path);
     if (FileWriter.is_open())
     {
-        MJson Json;
-        Json[GET_MEMBER_NAME_CHECKED(MRenderSettings, DisplaySize)] = DisplaySize.GetName();
+        nlohmann::json Json;
+        Json[GET_MEMBER_NAME_CHECKED(FRenderSettings, DisplaySize)] = DisplaySize.GetName();
 
         FileWriter << Json;
     }
     FileWriter.close();
 }
 
-void MRenderSettings::LoadSettings(const MString& Path)
+void FRenderSettings::LoadSettings(const std::string& Path)
 {
-    MFileReader FileReader;
+    std::ifstream FileReader;
 
     FileReader.open(Path);
     if (FileReader.is_open())
     {
-        MJson Json;
+        nlohmann::json Json;
         FileReader >> Json;
 
-        if (Json[GET_MEMBER_NAME_CHECKED(MRenderSettings, DisplaySize)].is_string())
+        if (Json[GET_MEMBER_NAME_CHECKED(FRenderSettings, DisplaySize)].is_string())
         {
-            DisplaySize = MDisplaySize::GetDisplaySizeByName(Json[GET_MEMBER_NAME_CHECKED(MRenderSettings, DisplaySize)]);
+            DisplaySize = FDisplaySize::GetDisplaySizeByName(Json[GET_MEMBER_NAME_CHECKED(FRenderSettings, DisplaySize)]);
         }
     }
     FileReader.close();
 }
 
-MRenderSettings::MRenderSettings()
+FRenderSettings::FRenderSettings()
 {
 
 }

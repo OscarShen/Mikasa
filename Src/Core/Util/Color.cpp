@@ -1,6 +1,6 @@
 #include "Color.h"
 
-MColor::MColor(float Red, float Green, float Blue)
+FColor::FColor(float Red, float Green, float Blue)
     : R(R)
     , G(G)
     , B(B)
@@ -8,7 +8,7 @@ MColor::MColor(float Red, float Green, float Blue)
 {
 }
 
-MColor::MColor(float R, float G, float B, float A)
+FColor::FColor(float R, float G, float B, float A)
     : R(R)
     , G(G)
     , B(B)
@@ -16,7 +16,7 @@ MColor::MColor(float R, float G, float B, float A)
 {
 }
 
-MColor::MColor(float R, float G, float B, bool Normalize)
+FColor::FColor(float R, float G, float B, bool Normalize)
     : R(R)
     , G(G)
     , B(B)
@@ -30,32 +30,32 @@ MColor::MColor(float R, float G, float B, bool Normalize)
     }
 }
 
-MVector MColor::getVector() const
+glm::vec3 FColor::getVector() const
 {
-    return MVector(R, G, B);
+    return glm::vec3(R, G, B);
 }
 
-MVector4 MColor::GetVector4() const
+glm::vec4 FColor::GetVector4() const
 {
-    return MVector4(R, G, B, A);
+    return glm::vec4(R, G, B, A);
 }
 
-MColor MColor::operator*(float N) const
+FColor FColor::operator*(float N) const
 {
-    return MColor(R * N, G * N, B * N, A);
+    return FColor(R * N, G * N, B * N, A);
 }
 
-MColor MColor::operator*(const MColor& Color) const
+FColor FColor::operator*(const FColor& Color) const
 {
-    return MColor(R * Color.R, G * Color.G, B * Color.B, A);
+    return FColor(R * Color.R, G * Color.G, B * Color.B, A);
 }
 
-MString MColor::ToString() const
+std::string FColor::ToString() const
 {
     return "(" + std::to_string(R) + ", " + std::to_string(G) + ", " + std::to_string(B) + ")";
 }
 
-MColor::MColor(const MVector& InColor)
+FColor::FColor(const glm::vec3& InColor)
     : R(InColor.r)
     , G(InColor.g)
     , B(InColor.b)
@@ -64,7 +64,7 @@ MColor::MColor(const MVector& InColor)
 
 }
 
-MHsvColor::MHsvColor(float Hue, float Saturation, float Value)
+FHsvColor::FHsvColor(float Hue, float Saturation, float Value)
     : Hue(Hue)
     , Saturation(Saturation)
     , Value(Value)

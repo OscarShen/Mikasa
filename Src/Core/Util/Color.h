@@ -2,30 +2,30 @@
 
 #include "CoreMinimal.h"
 
-class MHsvColor
+class FHsvColor
 {
 public:
-    MHsvColor(float Hue, float Saturation, float Value);
+    FHsvColor(float Hue, float Saturation, float Value);
 
 public:
     float Hue, Saturation, Value;
 };
 
-class MColor
+class FColor
 {
 public:
-    MColor(const MVector& InColor);
-    MColor(float R, float G, float B);
-    MColor(float R, float G, float B, float A);
-    MColor(float R, float G, float B, bool Normalize);
+    FColor(const glm::vec3& InColor);
+    FColor(float R, float G, float B);
+    FColor(float R, float G, float B, float A);
+    FColor(float R, float G, float B, bool Normalize);
 
-    MVector getVector() const;
-    MVector4 GetVector4() const;
+    glm::vec3 getVector() const;
+    glm::vec4 GetVector4() const;
 
-    MColor operator*(float N) const;
-    MColor operator*(const MColor& Color) const;
+    FColor operator*(float N) const;
+    FColor operator*(const FColor& Color) const;
 
-    MString ToString() const;
+    std::string ToString() const;
 
 public:
     float R, G, B, A;

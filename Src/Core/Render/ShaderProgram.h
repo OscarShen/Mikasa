@@ -2,8 +2,8 @@
 
 #include "CoreMinimal.h"
 
-class MShaderProgram
+class FShaderProgram
 {
 public:
-    MShaderProgram(const MString& VertexPath, const MString& FragmentPath);
+    FShaderProgram(const std::string& VertexPath, const std::string& FragmentPath);
 };

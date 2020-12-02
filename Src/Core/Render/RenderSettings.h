@@ -4,17 +4,17 @@
 
 #include "Display/Display.h"
 
-class MRenderSettings
+class FRenderSettings
 {
 public:
-    MDisplaySize DisplaySize = MDisplaySize::WIN_1600_900;
+    FDisplaySize DisplaySize = FDisplaySize::WIN_1600_900;
 
 public:
-    static MRenderSettings& Get();
+    static FRenderSettings& Get();
 
-    void SaveSettings(const MString& Path);
-    void LoadSettings(const MString& Path);
+    void SaveSettings(const std::string& Path);
+    void LoadSettings(const std::string& Path);
 
 private:
-    MRenderSettings();
+    FRenderSettings();
 };

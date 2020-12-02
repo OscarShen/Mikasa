@@ -2,8 +2,8 @@
 
 #include "CoreMinimal.h"
 
-class MFileHelper
+class FFileHelper
 {
 public:
-    static MString GetResourcePath();
+    static std::string GetResourcePath();
 };

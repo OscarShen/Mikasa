@@ -69,79 +69,14 @@
  */
 struct CORE_API FMath
 {
-	// Returns the length of x, i.e., sqrt(x * x).
-	template <typename T>
-	static float Length(const T& V)
-	{
-		return glm::length(V);
-	}
-
-	template <typename T>
-	static float LengthSquare(const T& V)
-	{
-		return Dot(V, V);
-	}
-
-	// Returns the distance betwwen p0 and p1, i.e., length(p0 - p1).
-	template <typename T>
-	static float Distance(const T& P0, const T& P1)
-	{
-		return glm::distance(P0, P1);
-	}
-
-	// Returns the dot product of x and y, i.e., result = x * y.
-	template <typename T>
-	static float Dot(const T& X, const T& Y)
-	{
-		return glm::dot(X, Y);
-	}
-
-	// Returns the cross product of x and y.
-	template <typename T>
-	static T Cross(const T& X, const T& Y)
-	{
-		return glm::cross(X, Y);
-	}
-
-	// Returns a vector in the same direction as x but with length of 1.
-	template <typename T>
-	static T Normalize(const T& V)
-	{
-		return glm::normalize(V);
-	}
-
-	// If dot(Nref, I) < 0.0, return N, otherwise, return -N.
-	template <typename T>
-	static T FaceForward(const T& N, const T& I, const T& Nref)
-	{
-		return glm::faceforward(N, I, Nref);
-	}
-
-	// For the incident vector I and surface orientation N, 
-	// returns the reflection direction : result = I - 2.0 * dot(N, I) * N.
-	template <typename T>
-	static T Reflect(const T& I, const T& N)
-	{
-		return glm::reflect(I, N);
-	}
-
-	// For the incident vector I and surface normal N, 
-	// and the ratio of indices of refraction eta, 
-	// return the refraction vector.
-	template <typename T>
-	static T Refract(const T& I, const T& N, float Eta)
-	{
-		return glm::refract(I, N, Eta);
-	}
-
 	/**
 	* Converts a float to an integer with truncation towards zero.
 	* @param F		Floating point value to convert
 	* @return		Truncated integer.
 	*/
-	static constexpr int32 TruncToInt(float F)
+	static constexpr int32_t TruncToInt(float F)
 	{
-		return (int32)F;
+		return (int32_t)F;
 	}
 
 	/**
@@ -169,7 +104,7 @@ struct CORE_API FMath
 	 * @param F		Floating point value to convert
 	 * @return		An integer less or equal to 'F'.
 	 */
-	static  int32 FloorToInt(float F)
+	static  int32_t FloorToInt(float F)
 	{
 		return TruncToInt(floorf(F));
 	}
@@ -199,7 +134,7 @@ struct CORE_API FMath
 	 * @param F		Floating point value to convert
 	 * @return		The nearest integer to 'F'.
 	 */
-	static  int32 RoundToInt(float F)
+	static  int32_t RoundToInt(float F)
 	{
 		return FloorToInt(F + 0.5f);
 	}
@@ -229,7 +164,7 @@ struct CORE_API FMath
 	* @param F		Floating point value to convert
 	* @return		An integer greater or equal to 'F'.
 	*/
-	static  int32 CeilToInt(float F)
+	static  int32_t CeilToInt(float F)
 	{
 		return TruncToInt(ceilf(F));
 	}
@@ -323,7 +258,7 @@ struct CORE_API FMath
 	static  float Acos(float Value) { return acosf((Value < -1.f) ? -1.f : ((Value < 1.f) ? Value : 1.f)); }
 	static  float Tan(float Value) { return tanf(Value); }
 	static  float Atan(float Value) { return atanf(Value); }
-	static  float Atan2(float Y, float X);
+	//static  float Atan2(float Y, float X);
 	static  float Sqrt(float Value) { return sqrtf(Value); }
 	static  float Pow(float A, float B) { return powf(A, B); }
 
@@ -342,50 +277,50 @@ struct CORE_API FMath
 	/** Return true if value is NaN (not a number). */
 	static  bool IsNaN(float A)
 	{
-		return ((*(uint32*)&A) & 0x7FFFFFFFU) > 0x7F800000U;
+		return ((*(uint32_t*)&A) & 0x7FFFFFFFU) > 0x7F800000U;
 	}
 	static  bool IsNaN(double A)
 	{
-		return ((*(uint64*)&A) & 0x7FFFFFFFFFFFFFFFULL) > 0x7FF0000000000000ULL;
+		return ((*(uint64_t*)&A) & 0x7FFFFFFFFFFFFFFFULL) > 0x7FF0000000000000ULL;
 	}
 
 	/** Return true if value is finite (not NaN and not Infinity). */
 	static  bool IsFinite(float A)
 	{
-		return ((*(uint32*)&A) & 0x7F800000U) != 0x7F800000U;
+		return ((*(uint32_t*)&A) & 0x7F800000U) != 0x7F800000U;
 	}
 	static  bool IsFinite(double A)
 	{
-		return ((*(uint64*)&A) & 0x7FF0000000000000ULL) != 0x7FF0000000000000ULL;
+		return ((*(uint64_t*)&A) & 0x7FF0000000000000ULL) != 0x7FF0000000000000ULL;
 	}
 
 	static  bool IsNegativeFloat(float A)
 	{
-		return ((*(uint32*)&A) >= (uint32)0x80000000); // Detects sign bit.
+		return ((*(uint32_t*)&A) >= (uint32_t)0x80000000); // Detects sign bit.
 	}
 
 	static  bool IsNegativeDouble(double A)
 	{
-		return ((*(uint64*)&A) >= (uint64)0x8000000000000000); // Detects sign bit.
+		return ((*(uint64_t*)&A) >= (uint64_t)0x8000000000000000); // Detects sign bit.
 	}
 
 	/** Returns a random integer between 0 and RAND_MAX, inclusive */
-	static  int32 Rand() { return rand(); }
+	static  int32_t Rand() { return rand(); }
 
 	/** Seeds global random number functions Rand() and FRand() */
-	static void RandInit(int32 Seed) { srand(Seed); }
+	static void RandInit(int32_t Seed) { srand(Seed); }
 
 	/** Returns a random float between 0 and 1, inclusive. */
 	static float FRand() { return Rand() / (float)RAND_MAX; }
 
-	/** Seeds future calls to SRand() */
-	static void SRandInit(int32 Seed);
+	///** Seeds future calls to SRand() */
+	//static void SRandInit(int32_t Seed);
 
-	/** Returns the current seed for SRand(). */
-	static int32 GetRandSeed();
+	///** Returns the current seed for SRand(). */
+	//static int32_t GetRandSeed();
 
-	/** Returns a seeded random float in the range [0,1), using the seed from SRandInit(). */
-	static float SRand();
+	///** Returns a seeded random float in the range [0,1), using the seed from SRandInit(). */
+	//static float SRand();
 
 	/**
 	 * Computes the base 2 logarithm for an integer value that is greater than 0.
@@ -394,11 +329,11 @@ struct CORE_API FMath
 	 * @param Value		The value to compute the log of
 	 * @return			Log2 of Value. 0 if Value is 0.
 	 */
-	static  uint32 FloorLog2(uint32 Value)
+	static  uint32_t FloorLog2(uint32_t Value)
 	{
 		/*		// reference implementation
 				// 1500ms on test data
-				uint32 Bit = 32;
+				uint32_t Bit = 32;
 				for (; Bit > 0;)
 				{
 					Bit--;
@@ -413,7 +348,7 @@ struct CORE_API FMath
 
 		// see http://codinggorilla.domemtech.com/?p=81 or http://en.wikipedia.org/wiki/Binary_logarithm but modified to return 0 for a input value of 0
 		// 686ms on test data
-		uint32 pos = 0;
+		uint32_t pos = 0;
 		if (Value >= 1 << 16) { Value >>= 16; pos += 16; }
 		if (Value >= 1 << 8) { Value >>= 8; pos += 8; }
 		if (Value >= 1 << 4) { Value >>= 4; pos += 4; }
@@ -435,10 +370,10 @@ struct CORE_API FMath
 			LogTable256[0] = -1; // if you want log(0) to return -1
 		}
 
-		int _ method3(uint32 v)
+		int _ method3(uint32_t v)
 		{
 			int r;     // r will be lg(v)
-			uint32 tt; // temporaries
+			uint32_t tt; // temporaries
 
 			if ((tt = v >> 24) != 0)
 			{
@@ -467,9 +402,9 @@ struct CORE_API FMath
 	 * @param Value		The value to compute the log of
 	 * @return			Log2 of Value. 0 if Value is 0.
 	 */
-	static  uint64 FloorLog2_64(uint64 Value)
+	static  uint64_t FloorLog2_64(uint64_t Value)
 	{
-		uint64 pos = 0;
+		uint64_t pos = 0;
 		if (Value >= 1ull << 32) { Value >>= 32; pos += 32; }
 		if (Value >= 1ull << 16) { Value >>= 16; pos += 16; }
 		if (Value >= 1ull << 8) { Value >>= 8; pos += 8; }
@@ -486,7 +421,7 @@ struct CORE_API FMath
 	 *
 	 * @return the number of zeros before the first "on" bit
 	 */
-	static  uint32 CountLeadingZeros(uint32 Value)
+	static  uint32_t CountLeadingZeros(uint32_t Value)
 	{
 		if (Value == 0) return 32;
 		return 31 - FloorLog2(Value);
@@ -499,7 +434,7 @@ struct CORE_API FMath
 	 *
 	 * @return the number of zeros before the first "on" bit
 	 */
-	static  uint64 CountLeadingZeros64(uint64 Value)
+	static  uint64_t CountLeadingZeros64(uint64_t Value)
 	{
 		if (Value == 0) return 64;
 		return 63 - FloorLog2_64(Value);
@@ -512,13 +447,13 @@ struct CORE_API FMath
 	 *
 	 * @return the number of zeros after the last "on" bit
 	 */
-	static  uint32 CountTrailingZeros(uint32 Value)
+	static  uint32_t CountTrailingZeros(uint32_t Value)
 	{
 		if (Value == 0)
 		{
 			return 32;
 		}
-		uint32 Result = 0;
+		uint32_t Result = 0;
 		while ((Value & 1) == 0)
 		{
 			Value >>= 1;
@@ -534,13 +469,13 @@ struct CORE_API FMath
 	 *
 	 * @return the number of zeros after the last "on" bit
 	 */
-	static  uint64 CountTrailingZeros64(uint64 Value)
+	static  uint64_t CountTrailingZeros64(uint64_t Value)
 	{
 		if (Value == 0)
 		{
 			return 64;
 		}
-		uint64 Result = 0;
+		uint64_t Result = 0;
 		while ((Value & 1) == 0)
 		{
 			Value >>= 1;
@@ -553,31 +488,31 @@ struct CORE_API FMath
 	 * Returns smallest N such that (1<<N)>=Arg.
 	 * Note: CeilLogTwo(0)=0 because (1<<0)=1 >= 0.
 	 */
-	static  uint32 CeilLogTwo(uint32 Arg)
+	static  uint32_t CeilLogTwo(uint32_t Arg)
 	{
-		int32 Bitmask = ((int32)(CountLeadingZeros(Arg) << 26)) >> 31;
+		int32_t Bitmask = ((int32_t)(CountLeadingZeros(Arg) << 26)) >> 31;
 		return (32 - CountLeadingZeros(Arg - 1)) & (~Bitmask);
 	}
 
-	static  uint64 CeilLogTwo64(uint64 Arg)
+	static  uint64_t CeilLogTwo64(uint64_t Arg)
 	{
-		int64 Bitmask = ((int64)(CountLeadingZeros64(Arg) << 57)) >> 63;
+		int64_t Bitmask = ((int64_t)(CountLeadingZeros64(Arg) << 57)) >> 63;
 		return (64 - CountLeadingZeros64(Arg - 1)) & (~Bitmask);
 	}
 
 	/** @return Rounds the given number up to the next highest power of two. */
-	static  uint32 RoundUpToPowerOfTwo(uint32 Arg)
+	static  uint32_t RoundUpToPowerOfTwo(uint32_t Arg)
 	{
 		return 1 << CeilLogTwo(Arg);
 	}
 
-	static  uint64 RoundUpToPowerOfTwo64(uint64 V)
+	static  uint64_t RoundUpToPowerOfTwo64(uint64_t V)
 	{
-		return uint64(1) << CeilLogTwo64(V);
+		return uint64_t(1) << CeilLogTwo64(V);
 	}
 
 	/** Spreads bits to every other. */
-	static  uint32 MortonCode2(uint32 x)
+	static  uint32_t MortonCode2(uint32_t x)
 	{
 		x &= 0x0000ffff;
 		x = (x ^ (x << 8)) & 0x00ff00ff;
@@ -588,7 +523,7 @@ struct CORE_API FMath
 	}
 
 	/** Reverses MortonCode2. Compacts every other bit to the right. */
-	static  uint32 ReverseMortonCode2(uint32 x)
+	static  uint32_t ReverseMortonCode2(uint32_t x)
 	{
 		x &= 0x55555555;
 		x = (x ^ (x >> 1)) & 0x33333333;
@@ -599,7 +534,7 @@ struct CORE_API FMath
 	}
 
 	/** Spreads bits to every 3rd. */
-	static  uint32 MortonCode3(uint32 x)
+	static  uint32_t MortonCode3(uint32_t x)
 	{
 		x &= 0x000003ff;
 		x = (x ^ (x << 16)) & 0xff0000ff;
@@ -610,7 +545,7 @@ struct CORE_API FMath
 	}
 
 	/** Reverses MortonCode3. Compacts every 3rd bit to the right. */
-	static  uint32 ReverseMortonCode3(uint32 x)
+	static  uint32_t ReverseMortonCode3(uint32_t x)
 	{
 		x &= 0x09249249;
 		x = (x ^ (x >> 2)) & 0x030c30c3;
@@ -686,81 +621,7 @@ struct CORE_API FMath
 		return (A <= B) ? A : B;
 	}
 
-	/**
-	* Min of Array
-	* @param	Array of templated type
-	* @param	Optional pointer for returning the index of the minimum element, if multiple minimum elements the first index is returned
-	* @return	The min value found in the array or default value if the array was empty
-	*/
-	template< class T >
-	static  T Min(const TArray<T>& Values, int32* MinIndex = NULL)
-	{
-		if (Values.Num() == 0)
-		{
-			if (MinIndex)
-			{
-				*MinIndex = INDEX_NONE;
-			}
-			return T();
-		}
-
-		T CurMin = Values[0];
-		int32 CurMinIndex = 0;
-		for (int32 v = 1; v < Values.Num(); ++v)
-		{
-			const T Value = Values[v];
-			if (Value < CurMin)
-			{
-				CurMin = Value;
-				CurMinIndex = v;
-			}
-		}
-
-		if (MinIndex)
-		{
-			*MinIndex = CurMinIndex;
-		}
-		return CurMin;
-	}
-
-	/**
-	* Max of Array
-	* @param	Array of templated type
-	* @param	Optional pointer for returning the index of the maximum element, if multiple maximum elements the first index is returned
-	* @return	The max value found in the array or default value if the array was empty
-	*/
-	template< class T >
-	static  T Max(const TArray<T>& Values, int32* MaxIndex = NULL)
-	{
-		if (Values.Num() == 0)
-		{
-			if (MaxIndex)
-			{
-				*MaxIndex = INDEX_NONE;
-			}
-			return T();
-		}
-
-		T CurMax = Values[0];
-		int32 CurMaxIndex = 0;
-		for (int32 v = 1; v < Values.Num(); ++v)
-		{
-			const T Value = Values[v];
-			if (CurMax < Value)
-			{
-				CurMax = Value;
-				CurMaxIndex = v;
-			}
-		}
-
-		if (MaxIndex)
-		{
-			*MaxIndex = CurMaxIndex;
-		}
-		return CurMax;
-	}
-
-	static  int32 CountBits(uint64 Bits)
+	static  int32_t CountBits(uint64_t Bits)
 	{
 		// https://en.wikipedia.org/wiki/Hamming_weight
 		Bits -= (Bits >> 1) & 0x5555555555555555ull;
@@ -776,40 +637,40 @@ struct CORE_API FMath
 
 private:
 
-	/** Error reporting for Fmod. Not inlined to avoid compilation issues and avoid all the checks and error reporting at all callsites. */
-	static void FmodReportError(float X, float Y);
+	///** Error reporting for Fmod. Not inlined to avoid compilation issues and avoid all the checks and error reporting at all callsites. */
+	//static void FmodReportError(float X, float Y);
 
 	// Random Number Functions
 
 	/** Helper function for rand implementations. Returns a random number in [0..A) */
-	static int32 RandHelper(int32 A)
+	static int32_t RandHelper(int32_t A)
 	{
 		// Note that on some platforms RAND_MAX is a large number so we cannot do ((rand()/(RAND_MAX+1)) * A)
 		// or else we may include the upper bound results, which should be excluded.
 		return A > 0 ? Min(TruncToInt(FRand() * A), A - 1) : 0;
 	}
 
-	static  int64 RandHelper64(int64 A)
+	static  int64_t RandHelper64(int64_t A)
 	{
 		// Note that on some platforms RAND_MAX is a large number so we cannot do ((rand()/(RAND_MAX+1)) * A)
 		// or else we may include the upper bound results, which should be excluded.
-		return A > 0 ? Min<int64>(TruncToInt(FRand() * A), A - 1) : 0;
+		return A > 0 ? Min<int64_t>(TruncToInt(FRand() * A), A - 1) : 0;
 	}
 
 	/** Helper function for rand implementations. Returns a random number >= Min and <= Max */
-	static  int32 RandRange(int32 Min, int32 Max)
+	static  int32_t RandRange(int32_t Min, int32_t Max)
 	{
-		const int32 Range = (Max - Min) + 1;
+		const int32_t Range = (Max - Min) + 1;
 		return Min + RandHelper(Range);
 	}
 
-	static  int64 RandRange(int64 Min, int64 Max)
+	static  int64_t RandRange(int64_t Min, int64_t Max)
 	{
-		const int64 Range = (Max - Min) + 1;
+		const int64_t Range = (Max - Min) + 1;
 		return Min + RandHelper64(Range);
 	}
 
-	/** Util to generate a random number in a range. Overloaded to distinguish from int32 version, where passing a float is typically a mistake. */
+	/** Util to generate a random number in a range. Overloaded to distinguish from int32_t version, where passing a float is typically a mistake. */
 	static  float RandRange(float InMin, float InMax)
 	{
 		return FRandRange(InMin, InMax);
@@ -827,8 +688,8 @@ private:
 		return (RandRange(0, 1) == 1) ? true : false;
 	}
 
-	/** Return a uniformly distributed random unit length vector = point on the unit sphere surface. */
-	static MVector VRand();
+//	/** Return a uniformly distributed random unit length vector = point on the unit sphere surface. */
+//	static MVector VRand();
 
 //	/**
 //	 * Returns a random unit vector, uniformly distributed, within the specified cone
@@ -923,7 +784,7 @@ private:
 //
 //private:
 //	template<typename FloatType, typename IntegralType, IntegralType SignedBit>
-//	static inline bool TIsNearlyEqualByULP(FloatType A, FloatType B, int32 MaxUlps)
+//	static inline bool TIsNearlyEqualByULP(FloatType A, FloatType B, int32_t MaxUlps)
 //	{
 //		// Any comparison with NaN always fails.
 //		if (FMath::IsNaN(A) || FMath::IsNaN(B))
@@ -989,9 +850,9 @@ private:
 //	 *	                        numbers are allowed to differ.
 //	 *	@return					true if the two values are nearly equal.
 //	 */
-//	static  bool IsNearlyEqualByULP(float A, float B, int32 MaxUlps = 4)
+//	static  bool IsNearlyEqualByULP(float A, float B, int32_t MaxUlps = 4)
 //	{
-//		return TIsNearlyEqualByULP<float, uint32, uint32(1U << 31)>(A, B, MaxUlps);
+//		return TIsNearlyEqualByULP<float, uint32_t, uint32_t(1U << 31)>(A, B, MaxUlps);
 //	}
 //
 //	/**
@@ -1011,9 +872,9 @@ private:
 //	 *	                        numbers are allowed to differ.
 //	 *	@return					true if the two values are nearly equal.
 //	 */
-//	static  bool IsNearlyEqualByULP(double A, double B, int32 MaxUlps = 4)
+//	static  bool IsNearlyEqualByULP(double A, double B, int32_t MaxUlps = 4)
 //	{
-//		return TIsNearlyEqualByULP<double, uint64, uint64(1ULL << 63)>(A, B, MaxUlps);
+//		return TIsNearlyEqualByULP<double, uint64_t, uint64_t(1ULL << 63)>(A, B, MaxUlps);
 //	}
 //
 //	/**
@@ -1558,7 +1419,7 @@ private:
 //
 //	/** Interpolation between A and B, applying a step function. */
 //	template< class T >
-//	static _DEBUGGABLE T InterpStep(const T& A, const T& B, float Alpha, int32 Steps)
+//	static _DEBUGGABLE T InterpStep(const T& A, const T& B, float Alpha, int32_t Steps)
 //	{
 //		if (Steps <= 1 || Alpha <= 0)
 //		{
@@ -1824,7 +1685,7 @@ private:
 //
 //	// @parma InOutScissorRect should be set to View.ViewRect before the call
 //	// @return 0: light is not visible, 1:use scissor rect, 2: no scissor rect needed
-//	static CORE_API uint32 ComputeProjectedSphereScissorRect(struct FIntRect& InOutScissorRect, MVector SphereOrigin, float Radius, MVector ViewOrigin, const FMatrix& ViewMatrix, const FMatrix& ProjMatrix);
+//	static CORE_API uint32_t ComputeProjectedSphereScissorRect(struct FIntRect& InOutScissorRect, MVector SphereOrigin, float Radius, MVector ViewOrigin, const FMatrix& ViewMatrix, const FMatrix& ProjMatrix);
 //
 //	// @param ConeOrigin Cone origin
 //	// @param ConeDirection Cone direction
@@ -1849,7 +1710,7 @@ private:
 //	 * @param AABB - the axis aligned bounding box to test
 //	 * @return -1 if below, 1 if above, 0 if intersects
 //	 */
-//	static CORE_API int32 PlaneAABBRelativePosition(const FPlane& P, const FBox& AABB);
+//	static CORE_API int32_t PlaneAABBRelativePosition(const FPlane& P, const FBox& AABB);
 //
 //	/**
 //	 * Performs a sphere vs box intersection test using Arvo's algorithm:
@@ -2200,9 +2061,9 @@ private:
 //	 * Formats an integer value into a human readable string (i.e. 12345 becomes "12,345")
 //	 *
 //	 * @param	Val		The value to use
-//	 * @return	FString	The human readable string
+//	 * @return	std::string	The human readable string
 //	 */
-//	static CORE_API FString FormatIntToHumanReadable(int32 Val);
+//	static CORE_API std::string FormatIntToHumanReadable(int32_t Val);
 //
 //
 //	// Utilities
@@ -2214,7 +2075,7 @@ private:
 //	 * @param NumBytes		Number of bytes to test (will be rounded down to a multiple of 4)
 //	 * @return				true if the memory region passed the test
 //	 */
-//	static CORE_API bool MemoryTest(void* BaseAddress, uint32 NumBytes);
+//	static CORE_API bool MemoryTest(void* BaseAddress, uint32_t NumBytes);
 //
 //	/**
 //	 * Evaluates a numerical equation.
@@ -2228,7 +2089,7 @@ private:
 //	 * @param	OutValue		Pointer to storage for the result.
 //	 * @return				1 if successful, 0 if equation fails.
 //	 */
-//	static CORE_API bool Eval(FString Str, float& OutValue);
+//	static CORE_API bool Eval(std::string Str, float& OutValue);
 //
 //	/**
 //	 * Computes the barycentric coordinates for a given point in a triangle - simpler version
@@ -2263,7 +2124,7 @@ private:
 //	static CORE_API MVector4 ComputeBaryCentric3D(const MVector& Point, const MVector& A, const MVector& B, const MVector& C, const MVector& D);
 //
 //	/** 32 bit values where BitFlag[x] == (1<<x) */
-//	static CORE_API const uint32 BitFlag[32];
+//	static CORE_API const uint32_t BitFlag[32];
 //
 //	/**
 //	 * Returns a smooth Hermite interpolation between 0 and 1 for the value X (where X ranges between A and B)
@@ -2290,10 +2151,10 @@ private:
 //	}
 //
 //	/**
-//	 * Get a bit in memory created from bitflags (uint32 Value:1), used for EngineShowFlags,
+//	 * Get a bit in memory created from bitflags (uint32_t Value:1), used for EngineShowFlags,
 //	 * TestBitFieldFunctions() tests the implementation
 //	 */
-//	static inline bool ExtractBoolFromBitfield(uint8* Ptr, uint32 Index)
+//	static inline bool ExtractBoolFromBitfield(uint8* Ptr, uint32_t Index)
 //	{
 //		uint8* BytePtr = Ptr + Index / 8;
 //		uint8 Mask = (uint8)(1 << (Index & 0x7));
@@ -2302,10 +2163,10 @@ private:
 //	}
 //
 //	/**
-//	 * Set a bit in memory created from bitflags (uint32 Value:1), used for EngineShowFlags,
+//	 * Set a bit in memory created from bitflags (uint32_t Value:1), used for EngineShowFlags,
 //	 * TestBitFieldFunctions() tests the implementation
 //	 */
-//	static inline void SetBoolInBitField(uint8* Ptr, uint32 Index, bool bSet)
+//	static inline void SetBoolInBitField(uint8* Ptr, uint32_t Index, bool bSet)
 //	{
 //		uint8* BytePtr = Ptr + Index / 8;
 //		uint8 Mask = (uint8)(1 << (Index & 0x7));
@@ -2331,7 +2192,7 @@ private:
 //	static uint8 Quantize8UnsignedByte(float x)
 //	{
 //		// 0..1 -> 0..255
-//		int32 Ret = (int32)(x * 255.999f);
+//		int32_t Ret = (int32_t)(x * 255.999f);
 //
 //		check(Ret >= 0);
 //		check(Ret <= 255);
@@ -2350,11 +2211,11 @@ private:
 //	}
 //
 //	// Use the Euclidean method to find the GCD
-//	static int32 GreatestCommonDivisor(int32 a, int32 b)
+//	static int32_t GreatestCommonDivisor(int32_t a, int32_t b)
 //	{
 //		while (b != 0)
 //		{
-//			int32 t = b;
+//			int32_t t = b;
 //			b = a % b;
 //			a = t;
 //		}
@@ -2363,9 +2224,9 @@ private:
 //
 //	// LCM = a/gcd * b
 //	// a and b are the number we want to find the lcm
-//	static int32 LeastCommonMultiplier(int32 a, int32 b)
+//	static int32_t LeastCommonMultiplier(int32_t a, int32_t b)
 //	{
-//		int32 CurrentGcd = GreatestCommonDivisor(a, b);
+//		int32_t CurrentGcd = GreatestCommonDivisor(a, b);
 //		return CurrentGcd == 0 ? 0 : (a / CurrentGcd) * b;
 //	}
 //
