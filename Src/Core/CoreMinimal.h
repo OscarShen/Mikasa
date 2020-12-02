@@ -18,8 +18,10 @@
 
 #pragma warning(disable:4251)    
 
-typedef int32_t Int32;
-typedef int64_t Int64;
+typedef int32_t int32;
+typedef int64_t int64;
+typedef uint32_t uint32;
+typedef uint64_t uint64;
 
 typedef std::string MString;
 typedef std::ofstream MFileWriter;

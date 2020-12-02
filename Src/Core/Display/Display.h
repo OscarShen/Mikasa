@@ -12,16 +12,16 @@ public:
     static MDisplaySize GetDisplaySizeByName(const MString& Name);
     
 public:
-    MDisplaySize(const MString& InName, Int32 InWidth, Int32 InHeight);
+    MDisplaySize(const MString& InName, int32 InWidth, int32 InHeight);
 
-    Int32 GetWidth();
-    Int32 GetHeight();
+    int32 GetWidth();
+    int32 GetHeight();
     const MString& GetName();
 
 private:
     MString Name;
-    Int32 Width;
-    Int32 Height;
+    int32 Width;
+    int32 Height;
 };
 
 class CORE_API MDisplay

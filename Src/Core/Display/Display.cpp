@@ -16,19 +16,19 @@ MDisplaySize MDisplaySize::GetDisplaySizeByName(const MString& Name)
     return MDisplaySize::WIN_1600_900;
 }
 
-MDisplaySize::MDisplaySize(const MString& InName, Int32 InWidth, Int32 InHeight)
+MDisplaySize::MDisplaySize(const MString& InName, int32 InWidth, int32 InHeight)
     : Name(InName)
     , Width(InWidth)
     , Height(InHeight)
 {
 }
 
-Int32 MDisplaySize::GetWidth()
+int32 MDisplaySize::GetWidth()
 {
     return Width;
 }
 
-Int32 MDisplaySize::GetHeight()
+int32 MDisplaySize::GetHeight()
 {
     return Height;
 }
